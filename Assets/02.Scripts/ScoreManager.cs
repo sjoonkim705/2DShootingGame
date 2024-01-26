@@ -13,9 +13,36 @@ public class ScoreManager : MonoBehaviour
     public Text ScoreTextUI;
     public Text BestScoreTextUI;
 
-    public int Score = 0;
+    private int _score = 0;
     public int BestScore = 0;
 
+    // 목표 : score속성에 대한 capsulization
+    public int GetScore()
+    {
+        return _score;
+    }
+    public void SetScore(int score)
+    {
+        if (score < 0)
+        {
+            return;
+        }
+
+        _score = score;
+        if (_score > BestScore)
+        {
+            BestScore = _score;
+            // 목표 : 최고 점수를 저장
+            // 'Playerprefs' 클래스를 사용
+            // -> 값을 '키(key)'와 값(Value) 형태로 저장하는 클래스.
+            // 저장할 수 있는 데이터타입은 int, float, string
+            // 타입별로 저장/로드가 가능한 Set/Get 메서드가 있다.
+            PlayerPrefs.SetInt("BestScore", BestScore);
+        }
+
+        ScoreTextUI.text = $"점수: {_score}";
+        BestScoreTextUI.text = $"최고점수: {BestScore}";
+    }
 
     public void Start()
     {
@@ -32,4 +59,5 @@ public class ScoreManager : MonoBehaviour
     // 2-3. 컴포넌트의 Score 속성을 증가시킨다.
 
     // 3. 스코어를 화면에 표시한다.
+
 }

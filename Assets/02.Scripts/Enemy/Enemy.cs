@@ -203,20 +203,9 @@ public class Enemy : MonoBehaviour
         //playerInfo.KillCount++;
         GameObject smGameObject = GameObject.Find("ScoreManager");
         ScoreManager scoreManager = smGameObject.GetComponent<ScoreManager>();
-        scoreManager.Score += 1;
-        if (scoreManager.Score > scoreManager.BestScore)
-        {
-            scoreManager.BestScore = scoreManager.Score;
-            // 목표 : 최고 점수를 저장
-            // 'Playerprefs' 클래스를 사용
-            // -> 값을 '키(key)'와 값(Value) 형태로 저장하는 클래스.
-            // 저장할 수 있는 데이터타입은 int, float, string
-            // 타입별로 저장/로드가 가능한 Set/Get 메서드가 있다.
-            PlayerPrefs.SetInt("BestScore", scoreManager.BestScore);
-        }
+        int score = scoreManager.GetScore();
+        scoreManager.SetScore(score + 1);
 
-        scoreManager.ScoreTextUI.text = $"점수: {scoreManager.Score}";
-        scoreManager.BestScoreTextUI.text = $"최고점수: {scoreManager.BestScore}";
 
     }
 
