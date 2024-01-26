@@ -80,19 +80,18 @@ public class Item : MonoBehaviour
             Player playerInfo = otherCollision.gameObject.GetComponent<Player>();
             if (iType == ItemType.Health)
             {
-                playerInfo.PlayerHP++;
+                playerInfo.AddHealth(1);
                 GameObject HealthVFX = GameObject.Instantiate(ItemVFXPrefab);
                 HealthVFX.transform.position = playerMove.transform.position;
                 
-                //Debug.Log($"PlayerHP : {playerInfo.PlayerHP}");
             }
             else if (iType == ItemType.SpeedUp)
             {
-                playerMove.Speed += 1f;
+                playerMove.IncreaseSpeed();
                 GameObject SpeedUpVFX = GameObject.Instantiate(ItemVFXPrefab);
                 SpeedUpVFX.transform.position = playerMove.transform.position;
 
-                Debug.Log($"Speed : {playerMove.Speed}");
+                Debug.Log($"Speed : {playerMove.GetSpeed()}");
 
             }
             Destroy(this.gameObject);

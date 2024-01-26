@@ -134,7 +134,10 @@ public class Enemy : MonoBehaviour
         {
             Player player = collision.collider.GetComponent<Player>();
             EnemyDie();
-            player.PlayerHP--;
+            int playerHP = player.GetPlayerHP();
+            playerHP--;
+            player.SetPlayerHP(playerHP);
+            //player.AddHealth(false);
         }
 
         if (EnemyHP <= 0)
@@ -204,7 +207,7 @@ public class Enemy : MonoBehaviour
         GameObject smGameObject = GameObject.Find("ScoreManager");
         ScoreManager scoreManager = smGameObject.GetComponent<ScoreManager>();
         int score = scoreManager.GetScore();
-        scoreManager.SetScore(score + 1);
+        scoreManager.AddScore();
 
 
     }

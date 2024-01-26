@@ -43,6 +43,10 @@ public class ScoreManager : MonoBehaviour
         ScoreTextUI.text = $"점수: {_score}";
         BestScoreTextUI.text = $"최고점수: {BestScore}";
     }
+    public void AddScore()
+    {
+        SetScore(_score + 1);
+    }
 
     public void Start()
     {

@@ -24,7 +24,7 @@ public class RingingItem : MonoBehaviour
         if (collision.collider.tag == "Player")
         {
             Player player = collision.collider.GetComponent<Player>();
-            player.PlayerHP++;
+            player.AddHealth(1);
             Destroy(this.gameObject);
         }
     }

@@ -16,14 +16,27 @@ public class PlayerMove : MonoBehaviour
     
      **/
 
-    public float Speed = 3f; // 이동 속도: 초당 3만큼 이동하겠다.
+    private float _speed = 3f; // 이동 속도: 초당 3만큼 이동하겠다.
     public const float MinX = -3f;
     public const float MaxX = 3f;
     public const float MinY = -6f;
     public const float MaxY = 0f;
 
     public Animator MyAnimator;
+    public float GetSpeed()
+    {
+ 
+        return _speed;
+    }
+    public void SetSpeed(float speed)
+    {
+        _speed = speed;
 
+    }
+    public void IncreaseSpeed()
+    {
+        SetSpeed(_speed + 1);
+    }
     private void Awake()
     {
         MyAnimator = this.gameObject.GetComponent<Animator>();
@@ -75,7 +88,7 @@ public class PlayerMove : MonoBehaviour
         // transform.Translate( dir * Speed * Time.deltaTime );
         // 공식을 이용한 이동
         // 새로운 위치 = 현재 위치 + 속도 * 시간
-        Vector2 newPosition = (Vector2)transform.position + (dir * Speed) * Time.deltaTime;
+        Vector2 newPosition = (Vector2)transform.position + (dir * _speed) * Time.deltaTime;
 
 
 
@@ -115,9 +128,9 @@ public class PlayerMove : MonoBehaviour
         bool speedUp = Input.GetKeyDown(KeyCode.E);
         bool speedDown = Input.GetKeyDown(KeyCode.Q);
         if (speedUp)
-            Speed = Speed + 1f;
+            _speed += 1f;
         if (speedDown)
-            Speed = Speed - 1f;
+            _speed -= 1f;
     }
 
 }
