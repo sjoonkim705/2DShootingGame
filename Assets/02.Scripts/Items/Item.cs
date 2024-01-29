@@ -87,7 +87,7 @@ public class Item : MonoBehaviour
             }
             else if (iType == ItemType.SpeedUp)
             {
-                playerMove.IncreaseSpeed();
+                playerMove.AddSpeed(1);
                 GameObject SpeedUpVFX = GameObject.Instantiate(ItemVFXPrefab);
                 SpeedUpVFX.transform.position = playerMove.transform.position;
 

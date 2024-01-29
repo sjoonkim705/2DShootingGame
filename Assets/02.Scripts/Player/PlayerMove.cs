@@ -33,9 +33,9 @@ public class PlayerMove : MonoBehaviour
         _speed = speed;
 
     }
-    public void IncreaseSpeed()
+    public void AddSpeed(float amount)
     {
-        SetSpeed(_speed + 1);
+        SetSpeed(_speed + amount);
     }
     private void Awake()
     {
@@ -55,7 +55,18 @@ public class PlayerMove : MonoBehaviour
         // 30fps: d-> 0.03초
         // 60fps: d-> 0.016초
         Move();
-        SpeedUpDown();
+        bool speedUp = Input.GetKeyDown(KeyCode.E);
+        bool speedDown = Input.GetKeyDown(KeyCode.Q);
+        
+        if(speedUp)
+        {
+            AddSpeed(1);
+        }
+
+        if(speedDown)
+        {
+            AddSpeed(-1);
+        }
 
     }
 
@@ -123,14 +134,6 @@ public class PlayerMove : MonoBehaviour
 
 
     }
-    private void SpeedUpDown()
-    {
-        bool speedUp = Input.GetKeyDown(KeyCode.E);
-        bool speedDown = Input.GetKeyDown(KeyCode.Q);
-        if (speedUp)
-            _speed += 1f;
-        if (speedDown)
-            _speed -= 1f;
-    }
+
 
 }

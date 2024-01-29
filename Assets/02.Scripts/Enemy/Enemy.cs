@@ -134,10 +134,8 @@ public class Enemy : MonoBehaviour
         {
             Player player = collision.collider.GetComponent<Player>();
             EnemyDie();
-            int playerHP = player.GetPlayerHP();
-            playerHP--;
-            player.SetPlayerHP(playerHP);
-            //player.AddHealth(false);
+            player.DecreaseHealth(1);
+
         }
 
         if (EnemyHP <= 0)
@@ -204,10 +202,11 @@ public class Enemy : MonoBehaviour
 
         Destroy(this.gameObject);
         //playerInfo.KillCount++;
-        GameObject smGameObject = GameObject.Find("ScoreManager");
-        ScoreManager scoreManager = smGameObject.GetComponent<ScoreManager>();
-        int score = scoreManager.GetScore();
-        scoreManager.AddScore();
+        //GameObject smGameObject = GameObject.Find("ScoreManager");
+        //ScoreManager scoreManager = smGameObject.GetComponent<ScoreManager>();
+        //int score = scoreManager.GetScore();
+        //scoreManager.AddScore();
+        ScoreManager.Instance.AddScore();
 
 
     }

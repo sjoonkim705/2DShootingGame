@@ -22,6 +22,19 @@ public class Player : MonoBehaviour
     {
         _playerHP = healthPoint;
     }
+    public void DecreaseHealth(int amount)
+    {
+        if (amount <= 0)
+        {
+            return;
+
+        }
+        _playerHP -= amount;
+        if (_playerHP <=0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -51,7 +64,7 @@ public class Player : MonoBehaviour
             // Debug.Log(AliveTime);
         }
 
-        if (_playerHP == 0)
+        if (_playerHP <= 0)
             Destroy(this.gameObject);
 
     }
@@ -65,6 +78,10 @@ public class Player : MonoBehaviour
     }
     public void AddHealth(int amount)
     {
+        if (amount <= 0)
+        {
+            return;
+        }    
         _playerHP += amount;
     }
 
