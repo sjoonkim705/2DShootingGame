@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 /*
@@ -26,41 +27,27 @@ public class ScoreManager : MonoBehaviour
     public Text BestScoreTextUI;
 
     private int _score = 0;
-    public int BestScore = 0;
+    public int BestScore;
 
-    public static ScoreManager Instance;
+    public static ScoreManager Instance { get; private set; }
 
     // 목표 : score속성에 대한 capsulization
-    public int GetScore()
+    public int Score
     {
-        return _score;
-    }
-    public void SetScore(int score)
-    {
-        if (score < 0)
+        get
         {
-            return;
+            return _score;
         }
-
-        _score = score;
-        if (_score > BestScore)
+        set
         {
-            BestScore = _score;
-            // 목표 : 최고 점수를 저장
-            // 'Playerprefs' 클래스를 사용
-            // -> 값을 '키(key)'와 값(Value) 형태로 저장하는 클래스.
-            // 저장할 수 있는 데이터타입은 int, float, string
-            // 타입별로 저장/로드가 가능한 Set/Get 메서드가 있다.
-            PlayerPrefs.SetInt("BestScore", BestScore);
+            if (value < 0)
+            {
+                return;
+            }
+            _score = value;
         }
+    }
 
-        ScoreTextUI.text = $"점수: {_score}";
-        BestScoreTextUI.text = $"최고점수: {BestScore}";
-    }
-    public void AddScore()
-    {
-        SetScore(_score + 1);
-    }
 
     private void Awake()
     {
@@ -88,9 +75,28 @@ public class ScoreManager : MonoBehaviour
     }
     public void Start()
     {
-        BestScore = PlayerPrefs.GetInt("BestScore");
-    }
 
+        // _score = score;
+        BestScore = PlayerPrefs.GetInt("BestScore");
+        //_bestScore = 0;
+
+    }
+    public void Update()
+    {
+        if (_score > BestScore)
+        {
+            BestScore = _score;
+            PlayerPrefs.SetInt("BestScore", BestScore);
+            // 목표 : 최고 점수를 저장
+            // 'Playerprefs' 클래스를 사용
+            // -> 값을 '키(key)'와 값(Value) 형태로 저장하는 클래스.
+            // 저장할 수 있는 데이터타입은 int, float, string
+            // 타입별로 저장/로드가 가능한 Set/Get 메서드가 있다.
+
+        }
+        ScoreTextUI.text = $"점수: {_score}";
+        BestScoreTextUI.text = $"최고점수: {BestScore}";
+    }
     // 구현 순서
     // 1. 만약에 적을 잡으면?
     // 2. 스코어를 증가 시킨다.

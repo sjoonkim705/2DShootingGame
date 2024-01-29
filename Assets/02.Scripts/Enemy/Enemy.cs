@@ -206,7 +206,8 @@ public class Enemy : MonoBehaviour
         //ScoreManager scoreManager = smGameObject.GetComponent<ScoreManager>();
         //int score = scoreManager.GetScore();
         //scoreManager.AddScore();
-        ScoreManager.Instance.AddScore();
+        ScoreManager.Instance.Score += 1;
+        Debug.Log(ScoreManager.Instance.Score);
 
 
     }

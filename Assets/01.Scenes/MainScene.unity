@@ -1221,7 +1221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87125a35b0279734186bc42ce124e54a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
   MyAnimator: {fileID: 1604548486}
 --- !u!114 &1604548482
 MonoBehaviour:
@@ -1307,7 +1306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d8a4708c118b6d4fb25254d9cc9f305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHP: 3
   AliveTime: 0
   KillCount: 0
   EnemyHitSound: {fileID: 1604548488}
@@ -1803,8 +1801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreTextUI: {fileID: 1107167317}
   BestScoreTextUI: {fileID: 2024504772}
-  Score: 0
-  BestScore: 10
+  BestScore: 0
 --- !u!4 &1900985463
 Transform:
   m_ObjectHideFlags: 0
