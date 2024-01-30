@@ -168,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 435169462}
   m_Layer: 6
-  m_Name: Muzzle
+  m_Name: Muzzle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1092,7 +1092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1197085683}
   m_Layer: 6
-  m_Name: SideMuzzle
+  m_Name: SideMuzzle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1125,7 +1125,7 @@ GameObject:
   - component: {fileID: 1604548478}
   - component: {fileID: 1604548484}
   - component: {fileID: 1604548481}
-  - component: {fileID: 1604548482}
+  - component: {fileID: 1604548489}
   - component: {fileID: 1604548483}
   - component: {fileID: 1604548485}
   - component: {fileID: 1604548486}
@@ -1222,29 +1222,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyAnimator: {fileID: 1604548486}
---- !u!114 &1604548482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1604548477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d8381724f4e6f34ebcd8ad39b176493, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 7615265422096586660, guid: a4f30a898e818d94d9f1e96030f70d2a, type: 3}
-  SideBulletPrefab: {fileID: 4734922415610073458, guid: 10bf5ab0578abef48b2f14ec76a004fb, type: 3}
-  BoomPrefab: {fileID: 7672403480198082726, guid: 8e4ad17465e36644eb1724d9116978e5, type: 3}
-  Muzzles:
-  - {fileID: 2101101825}
-  - {fileID: 435169461}
-  SideMuzzles:
-  - {fileID: 1197085682}
-  - {fileID: 2004032261}
-  AutoMode: 0
-  FireSource: {fileID: 1604548487}
 --- !u!60 &1604548483
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1549,6 +1526,33 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1604548489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604548477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61c09e8950e1f9449d4178d00422207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 7615265422096586660, guid: a4f30a898e818d94d9f1e96030f70d2a, type: 3}
+  SubBulletPrefab: {fileID: 4734922415610073458, guid: 10bf5ab0578abef48b2f14ec76a004fb, type: 3}
+  PoolSize: 20
+  _bulletPool: []
+  Muzzles:
+  - {fileID: 2101101825}
+  - {fileID: 435169461}
+  SubMuzzles:
+  - {fileID: 1197085682}
+  - {fileID: 2004032261}
+  Timer: 10
+  BoomTimer: 0
+  AutoMode: 0
+  FireSource: {fileID: 1604548487}
+  BoomPrefab: {fileID: 7672403480198082726, guid: 8e4ad17465e36644eb1724d9116978e5, type: 3}
 --- !u!1 &1609117850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,7 +1934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004032262}
   m_Layer: 6
-  m_Name: SideMuzzle1
+  m_Name: SideMuzzle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2337,7 +2341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2101101826}
   m_Layer: 6
-  m_Name: Muzzle
+  m_Name: Muzzle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

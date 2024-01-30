@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
     private void Start()
     {
         _target = GameObject.Find("Player");
-        Player player = GetComponent<Player>();
+       // Player player = GetComponent<Player>();
 
 
       //  _itemRigid.AddTorque(5f * Time.deltaTime);

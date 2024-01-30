@@ -14,7 +14,6 @@ public class Boom : MonoBehaviour
             Enemy enemy = enemies[i].GetComponent<Enemy>();
             enemy.EnemyDie();
             enemy.MakeItem();
-
         }
     }
 
@@ -30,7 +29,7 @@ public class Boom : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.CompareTag("Enemy"))
         {
             Enemy touchedEnemy = collision.gameObject.GetComponent<Enemy>();
             if (touchedEnemy != null )

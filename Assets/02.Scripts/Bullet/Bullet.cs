@@ -43,7 +43,6 @@ public class Bullet : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         // 1. 이동할 방향을 구한다.

@@ -123,11 +123,12 @@ public class Enemy : MonoBehaviour
         // EnemyAnimator.Play();
 
        
-        if (collision.collider.tag == "Bullet")
+        if (collision.collider.CompareTag("Bullet"))
         {
             Bullet bullet = collision.collider.GetComponent<Bullet>();
             EnemyHP -= bullet.BDamage;
-            Destroy(collision.collider.gameObject);     // bullet disappears when hits enemy
+            collision.gameObject.SetActive(false);
+            // Destroy(collision.collider.gameObject);     // bullet disappears when hits enemy
         }
 
         else if (collision.collider.tag == "Player")
@@ -200,7 +201,8 @@ public class Enemy : MonoBehaviour
         GameObject DieVFX = GameObject.Instantiate(EnemyDieVFXPrefab);
         DieVFX.transform.position = this.transform.position;
 
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+        //Destroy(this.gameObject);
         //playerInfo.KillCount++;
         //GameObject smGameObject = GameObject.Find("ScoreManager");
         //ScoreManager scoreManager = smGameObject.GetComponent<ScoreManager>();

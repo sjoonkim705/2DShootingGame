@@ -65,7 +65,11 @@ public class Player : MonoBehaviour
         }
 
         if (_playerHP <= 0)
-            Destroy(this.gameObject);
+        {
+            this.gameObject.SetActive(false);
+        }
+
+            
 
     }
     private void OnCollisionEnter2D(Collision2D collision)

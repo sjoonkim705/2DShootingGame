@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
     private const float MaxX = 3.0f;
 
     private float _spawnInterval;
-
+    private int _poolSize = 10;
     
     [Header("적 프리팹")]
     public GameObject Enemy_Base_Prefab;
@@ -34,16 +34,36 @@ public class EnemySpawner : MonoBehaviour
     public GameObject Enemy_Follow_Prefab;
 
 
-    //List<GameObject> Enemies = new List<GameObject>();
-    GameObject[] Enemies;
+    private List<Enemy> _enemyPool;
 
+    private void Awake()
+    {
+        _enemyPool = new List<Enemy>();
+        for (int i = 0; i < _poolSize; i++)
+        {
+            GameObject enemyObject = Instantiate(Enemy_Base_Prefab);
+            enemyObject.SetActive(false);
+            _enemyPool.Add(enemyObject.GetComponent<Enemy>());
+        }
+        for (int i = 0; i < _poolSize; i++)
+        {
+            GameObject enemyObject = Instantiate(Enemy_Target_Prefab);
+            enemyObject.SetActive(false);
+            _enemyPool.Add(enemyObject.GetComponent<Enemy>());
+        }
+
+        for (int i = 0; i < _poolSize; i++)
+        {
+            GameObject enemyObject = Instantiate(Enemy_Follow_Prefab);
+            enemyObject.SetActive(false);
+            _enemyPool.Add(enemyObject.GetComponent<Enemy>());
+        }
+    }
 
     void Start()
     {
-        Enemies = new GameObject[EnemyNumber];
         spawnTimer = 0f;
         SetRandomSpawnTime();
-
     }
     void Update()
     {
@@ -55,26 +75,38 @@ public class EnemySpawner : MonoBehaviour
             spawnPos.x = Random.Range(MinX, MaxX);
             transform.position = spawnPos;
 
-            if (EnemyNumber > enemyCount)
+            EnemyType enemyType = EnemyType.Basic;
+
+            int enemyRandomIndex = Random.Range(0, 10);
+            if (enemyRandomIndex < 4)
             {
-                int enemyRandomIndex = Random.Range(0, 10);
-                if (enemyRandomIndex < 4 )
-                {
-
-                    Enemies[enemyCount] = GameObject.Instantiate(Enemy_Target_Prefab, this.transform.position,transform.rotation);
-                }
-                else if (enemyRandomIndex < 5)
-                {
-                    Enemies[enemyCount] = GameObject.Instantiate(Enemy_Follow_Prefab, this.transform.position, transform.rotation);
-                }
-                else
-                {
-                    Enemies[enemyCount] = GameObject.Instantiate(Enemy_Base_Prefab, this.transform.position, transform.rotation);
-                }
-                //Enemies[enemyCount].transform.position = this.transform.position;
-                enemyCount++;
-
+                enemyType = EnemyType.Follow;
             }
+            else if (enemyRandomIndex < 5)
+            {
+                enemyType = EnemyType.Target;
+            }
+            else
+            {
+                enemyType = EnemyType.Basic;
+            }
+
+            Enemy enemy = null;
+
+            foreach (Enemy e in _enemyPool)
+            {
+                if (!e.gameObject.activeInHierarchy && e.EType == enemyType)
+                {
+                    enemy = e;
+                    break;
+                }
+            }
+
+            enemy.transform.position = this.transform.position;
+            enemy.gameObject.SetActive(true);
+       
+            enemyCount++;
+
             SetRandomSpawnTime();
             spawnTimer = 0;
         }

@@ -9,6 +9,14 @@ public class DestroyZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.CompareTag("Bullet"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+        else if (collision.CompareTag("Enemy"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+
     }
 }
