@@ -87,7 +87,18 @@ public class PlayerFire : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(Application.dataPath);
+        // 전처리 단계: 코드가 컴파일 되기 전에 미리 처리되는 단계
+        // 전처리문 코드를 이용해서 미리 처리되는 코드를 작성 할 수 있다.
+        // C#의 모든 전처리 코드는 #으로 시작한다. (#if, #elif, #endif)
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        GameObject.Find("Joystick canvas XYBZ").SetActive(false);
+#endif
+
+#if UNITY_ANDROID
+    Debug.Log("안드로이드 입니다.");
+#endif
+
         Timer = 0f;
         AutoMode = false;
     }
@@ -96,15 +107,47 @@ public class PlayerFire : MonoBehaviour
     {
         // 타이머 계산
         Timer -= Time.deltaTime;
+        if (AutoMode || Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
+        }
 
-        CheckAutoMode();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            CheckAutoMode(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            CheckAutoMode(false);
+        }
 
-        Fire();
 
-        BoomTimer -= Time.deltaTime;
+            BoomTimer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Boom();
+        }
 
-        // 붐 타이머가 0보다 같거나 작고 && 3번 버튼을 누르면
-        if(BoomTimer<= 0f && Input.GetKeyDown(KeyCode.Alpha3)) 
+    }
+
+    private void CheckAutoMode(bool isAutoMode)
+    {
+        if (isAutoMode)
+        {
+            Debug.Log("자동 공격 모드");
+            AutoMode = true;
+        }
+        else
+        {
+            Debug.Log("수동 공격 모드");
+            AutoMode = false;
+        }
+    }
+
+    private void Boom()
+    {
+
+        if (BoomTimer <= 0f )
         {
             // 붐 타이머 시간을 다시 쿨타임으로..
             BoomTimer = BOOM_COOL_TIME;
@@ -116,26 +159,10 @@ public class PlayerFire : MonoBehaviour
             boomObject.transform.position = new Vector2(0, 1.6f);
         }
     }
-
-    private void CheckAutoMode()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Debug.Log("자동 공격 모드");
-            AutoMode = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            Debug.Log("수동 공격 모드");
-            AutoMode = false;
-        }
-    }
-
     private void Fire()
     {
         // 1. 타이머가 0보다 작은 상태에서 발사 버튼을 누르거나 자동 공격 모드면
-        bool ready = AutoMode || Input.GetKeyDown(KeyCode.Space);
-        if (Timer <= 0 && ready)
+        if (Timer <= 0)
         {
             FireSource.Play();
 
@@ -200,7 +227,33 @@ public class PlayerFire : MonoBehaviour
                 // 2. 위치를 설정한다.
                 //subBullet.transform.position = subMuzzle.transform.position;
             }
+
         }
     }
 
+    public void OnClickXButton()
+    {
+        Debug.Log("X버튼이 클릭되었습니다.");
+        Fire();
+    }
+    public void OnClickYButton()
+    {
+        Debug.Log("Y버튼이 클릭되었습니다.");
+        if (AutoMode)
+        {
+            CheckAutoMode(false);
+        }
+        else if (!AutoMode)
+        {
+            CheckAutoMode(true);
+        }
+    }
+
+    // 궁극기 사용
+    public void OnClickBButton()
+    {
+        Debug.Log("B버튼이 클릭되었습니다.");
+        Boom();
+
+    }
 }
